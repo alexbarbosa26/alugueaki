@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Endereco implements Serializable {
+public class EnderecoImovel implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -25,16 +25,12 @@ public class Endereco implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "cidade_id")
 	private Cidade cidade;
-
-	@ManyToOne
-	@JoinColumn(name = "locador_id")
-	private Locador locador;
-
-	public Endereco() {
+	
+	public EnderecoImovel() {
 	}
 
-	public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep,
-			Cidade cidade, Locador locador) {
+	public EnderecoImovel(Integer id, String logradouro, String numero, String complemento, String bairro, String cep,
+			Cidade cidade) {
 		super();
 		this.id = id;
 		this.logradouro = logradouro;
@@ -43,7 +39,6 @@ public class Endereco implements Serializable {
 		this.bairro = bairro;
 		this.cep = cep;
 		this.cidade = cidade;
-		this.locador = locador;
 	}
 
 	public Integer getId() {
@@ -102,14 +97,6 @@ public class Endereco implements Serializable {
 		this.cidade = cidade;
 	}
 
-	public Locador getLocador() {
-		return locador;
-	}
-
-	public void setLocador(Locador locador) {
-		this.locador = locador;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -126,7 +113,7 @@ public class Endereco implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Endereco other = (Endereco) obj;
+		EnderecoImovel other = (EnderecoImovel) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

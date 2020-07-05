@@ -17,9 +17,9 @@ import com.alugueaki.project.domain.enums.TipoLocador;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Locador implements Serializable{
+public class Locador implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -27,20 +27,24 @@ public class Locador implements Serializable{
 	private String rg;
 	private Integer tipo;
 	private Date dataNascimento;
-	
+
 	@JsonIgnore
 	private String senha;
-	
-	@Column(unique=true)
+
+	@Column(unique = true)
 	private String cpfOuCnpj;
-	
-	@Column(unique=true)
+
+	@Column(unique = true)
 	private String email;
-	
-	@OneToMany(mappedBy="locador", cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "locador", cascade = CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 
-	public Locador() {}
+	@OneToMany(mappedBy = "locador", cascade = CascadeType.ALL)
+	private List<Imovel> imoveis = new ArrayList<>();
+
+	public Locador() {
+	}
 
 	public Locador(Integer id, String nome, String rg, TipoLocador tipo, Date dataNascimento, String senha,
 			String cpfOuCnpj, String email) {
@@ -48,7 +52,7 @@ public class Locador implements Serializable{
 		this.id = id;
 		this.nome = nome;
 		this.rg = rg;
-		this.tipo = (tipo==null) ? null : tipo.getCod();
+		this.tipo = (tipo == null) ? null : tipo.getCod();
 		this.dataNascimento = dataNascimento;
 		this.senha = senha;
 		this.cpfOuCnpj = cpfOuCnpj;
@@ -77,7 +81,7 @@ public class Locador implements Serializable{
 
 	public void setRg(String rg) {
 		this.rg = rg;
-	}	
+	}
 
 	public TipoLocador getTipo() {
 		return TipoLocador.toEnum(tipo);
@@ -127,6 +131,14 @@ public class Locador implements Serializable{
 		this.enderecos = enderecos;
 	}
 
+	public List<Imovel> getImoveis() {
+		return imoveis;
+	}
+
+	public void setImoveis(List<Imovel> imoveis) {
+		this.imoveis = imoveis;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -150,6 +162,6 @@ public class Locador implements Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
-	
+	}
+
 }
