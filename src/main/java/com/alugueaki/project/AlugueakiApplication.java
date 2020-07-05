@@ -12,6 +12,7 @@ import com.alugueaki.project.domain.Cidade;
 import com.alugueaki.project.domain.Endereco;
 import com.alugueaki.project.domain.Estado;
 import com.alugueaki.project.domain.Locador;
+import com.alugueaki.project.domain.enums.TipoLocador;
 import com.alugueaki.project.repositories.CidadeRepository;
 import com.alugueaki.project.repositories.EnderecoRepository;
 import com.alugueaki.project.repositories.EstadoRepository;
@@ -60,7 +61,7 @@ public class AlugueakiApplication implements CommandLineRunner {
 		estadoRepo.saveAll(Arrays.asList(uf, uf1, uf2, uf3));
 		cidadeRepo.saveAll(Arrays.asList(cid, cid1, cid2, cid3, cid4, cid5));
 		
-		Locador loc = new Locador(null, "Alex Barbosa", "051.113.335-92", 1, formato.parse("26/11/1990"),"" ,"051.113.335-92", "abarbosasilva7@gmail.com");
+		Locador loc = new Locador(null, "Alex Barbosa", "051.113.335-92", TipoLocador.PESSOAFISICA, formato.parse("26/11/1990"),"" ,"051.113.335-92", "abarbosasilva7@gmail.com");
 		
 		Endereco ed = new Endereco(null, "Rua rossini rosvelt de albuquerque", "3", "Bloco A", "Piedade", "54410-310", cid, loc);
 		Endereco ed2 = new Endereco(null, "Terceira travessa luis viana filho", "42", "Bloco A", "Centro", "54410-310", cid1, loc);

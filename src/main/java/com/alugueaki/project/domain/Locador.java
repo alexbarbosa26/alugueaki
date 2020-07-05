@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.alugueaki.project.domain.enums.TipoLocador;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -41,13 +42,13 @@ public class Locador implements Serializable{
 
 	public Locador() {}
 
-	public Locador(Integer id, String nome, String rg, Integer tipo, Date dataNascimento, String senha,
+	public Locador(Integer id, String nome, String rg, TipoLocador tipo, Date dataNascimento, String senha,
 			String cpfOuCnpj, String email) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.rg = rg;
-		this.tipo = tipo;
+		this.tipo = (tipo==null) ? null : tipo.getCod();
 		this.dataNascimento = dataNascimento;
 		this.senha = senha;
 		this.cpfOuCnpj = cpfOuCnpj;
@@ -76,14 +77,14 @@ public class Locador implements Serializable{
 
 	public void setRg(String rg) {
 		this.rg = rg;
+	}	
+
+	public TipoLocador getTipo() {
+		return TipoLocador.toEnum(tipo);
 	}
 
-	public Integer getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(Integer tipo) {
-		this.tipo = tipo;
+	public void setTipo(TipoLocador tipo) {
+		this.tipo = tipo.getCod();
 	}
 
 	public Date getDataNascimento() {
