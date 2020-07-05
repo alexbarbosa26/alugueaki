@@ -1,5 +1,6 @@
 package com.alugueaki.project;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.alugueaki.project.domain.Cidade;
 import com.alugueaki.project.domain.Endereco;
 import com.alugueaki.project.domain.Estado;
+import com.alugueaki.project.domain.Locador;
 import com.alugueaki.project.repositories.CidadeRepository;
 import com.alugueaki.project.repositories.EnderecoRepository;
 import com.alugueaki.project.repositories.EstadoRepository;
+import com.alugueaki.project.repositories.LocadorRepository;
 
 @SpringBootApplication
 public class AlugueakiApplication implements CommandLineRunner {
@@ -25,6 +28,11 @@ public class AlugueakiApplication implements CommandLineRunner {
 	
 	@Autowired
 	private EnderecoRepository enderecoRepo;
+	
+	@Autowired
+	private LocadorRepository locadorRepo;
+	
+	SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
 	public static void main(String[] args) {
 		SpringApplication.run(AlugueakiApplication.class, args);
@@ -52,9 +60,13 @@ public class AlugueakiApplication implements CommandLineRunner {
 		estadoRepo.saveAll(Arrays.asList(uf, uf1, uf2, uf3));
 		cidadeRepo.saveAll(Arrays.asList(cid, cid1, cid2, cid3, cid4, cid5));
 		
-		Endereco ed = new Endereco(null, "Rua rossini rosvelt de albuquerque", "3", "Bloco A", "Piedade", "54410-310", cid);
+		Locador loc = new Locador(null, "Alex Barbosa", "051.113.335-92", 1, formato.parse("26/11/1990"),"" ,"051.113.335-92", "abarbosasilva7@gmail.com");
 		
-		enderecoRepo.saveAll(Arrays.asList(ed));
+		Endereco ed = new Endereco(null, "Rua rossini rosvelt de albuquerque", "3", "Bloco A", "Piedade", "54410-310", cid, loc);
+		Endereco ed2 = new Endereco(null, "Terceira travessa luis viana filho", "42", "Bloco A", "Centro", "54410-310", cid1, loc);
+		
+		locadorRepo.saveAll(Arrays.asList(loc));
+		enderecoRepo.saveAll(Arrays.asList(ed, ed2));
 
 	}
 
