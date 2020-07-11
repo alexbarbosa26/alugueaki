@@ -14,6 +14,7 @@ import com.alugueaki.project.domain.EnderecoImovel;
 import com.alugueaki.project.domain.Estado;
 import com.alugueaki.project.domain.Imovel;
 import com.alugueaki.project.domain.Locador;
+import com.alugueaki.project.domain.Locatario;
 import com.alugueaki.project.domain.enums.TipoImovel;
 import com.alugueaki.project.domain.enums.TipoLocador;
 import com.alugueaki.project.repositories.CidadeRepository;
@@ -22,6 +23,7 @@ import com.alugueaki.project.repositories.EnderecoRepository;
 import com.alugueaki.project.repositories.EstadoRepository;
 import com.alugueaki.project.repositories.ImovelRepository;
 import com.alugueaki.project.repositories.LocadorRepository;
+import com.alugueaki.project.repositories.LocatarioRepository;
 
 @SpringBootApplication
 public class AlugueakiApplication implements CommandLineRunner {
@@ -43,6 +45,9 @@ public class AlugueakiApplication implements CommandLineRunner {
 	
 	@Autowired
 	private EnderecoImovelRepository enderecoImRepo;
+	
+	@Autowired
+	private LocatarioRepository locatarioRepo;
 	
 	SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -88,6 +93,10 @@ public class AlugueakiApplication implements CommandLineRunner {
 				
 		enderecoImRepo.saveAll(Arrays.asList(edim, edim2));
 		imovelRepo.saveAll(Arrays.asList(im, im2));
+		
+		Locatario locat = new Locatario(null, "Ana Jessica dos Santos", "12345678910", "051.113.335-92", formato.parse("13/04/1993"), "anajessica17@hotmail.com");
+		
+		locatarioRepo.saveAll(Arrays.asList(locat));
 
 	}
 
