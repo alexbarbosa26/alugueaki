@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Locatario implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -25,6 +27,7 @@ public class Locatario implements Serializable {
 	private String rg;
 	@Column(unique = true)
 	private String cpf;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date dataNascimento;
 	@Column(unique = true)
 	private String email;

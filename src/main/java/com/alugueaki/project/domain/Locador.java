@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.alugueaki.project.domain.enums.TipoLocador;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -30,6 +31,7 @@ public class Locador implements Serializable {
 	private String nome;
 	private String rg;
 	private Integer tipo;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date dataNascimento;
 	@ElementCollection
 	@CollectionTable(name="TELEFONE_LOCADOR")
